@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+// const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+// const apiKey = "35afad432b25150f5e8eb7b12dafe2f5";
 
 const HistoricalData = ({ location }) => {
   const [historicalData, setHistoricalData] = useState(null);
@@ -9,7 +10,7 @@ const HistoricalData = ({ location }) => {
   useEffect(() => {
     const fetchHistoricalData = async () => {
       try {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${location.lat}&lon=${location.lon}&dt=${Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 5}&appid=YOUR_OPENWEATHERMAP_API_KEY`);
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${location.lat}&lon=${location.lon}&dt=${Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 5}&appid=${apiKey}`);
         setHistoricalData(response.data);
       } catch (error) {
         console.error("Error fetching historical data: ", error);
@@ -28,6 +29,7 @@ const HistoricalData = ({ location }) => {
   return (
     <div>
       <h2>Historical Weather Data</h2>
+      
       {historicalData.hourly.map((hour, index) => (
         <div key={index}>
           <p>Time: {new Date(hour.dt * 1000).toLocaleTimeString()}</p>
