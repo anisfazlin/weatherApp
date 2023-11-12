@@ -25,8 +25,8 @@ const SearchButton = styled.button`
   color: #007bff; // Set the button text color to blue
 `;
 
-// const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-const apiKey = "35afad432b25150f5e8eb7b12dafe2f5";
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+// const apiKey = "35afad432b25150f5e8eb7b12dafe2f5";
 
 function SearchBar({ setWeatherData }) {
   const [location, setLocation] = useState('');

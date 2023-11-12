@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
 const ForecastWrapper = styled.div`
   padding: 20px;
   border-radius: 10px;
@@ -24,7 +26,7 @@ function Forecast({ city }) {
 
   useEffect(() => {
     const fetchForecastData = async () => {
-      const response = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=35afad432b25150f5e8eb7b12dafe2f5`);
+      const response = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`);
       setForecastData(response.data.list);
     };
 
