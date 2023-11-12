@@ -18,7 +18,6 @@ function App() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       if (location) {
-        // const apiKey = '35afad432b25150f5e8eb7b12dafe2f5';
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
         setWeatherData(response.data);
       }

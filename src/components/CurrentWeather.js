@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-// const apiKey = "35afad432b25150f5e8eb7b12dafe2f5";
 
 const WeatherContainer = styled.div`
   display: flex;
