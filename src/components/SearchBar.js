@@ -27,12 +27,13 @@ const SearchButton = styled.button`
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-function SearchBar({ setWeatherData }) {
+const SearchBar = () => {
   const [location, setLocation] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`);
+      const response = await axios.get(`/api/weather?city=${location}`);
       setWeatherData(response.data);
     } catch (error) {
       console.error(`Failed to fetch weather data: ${error}`);
@@ -41,14 +42,22 @@ function SearchBar({ setWeatherData }) {
 
   return (
     <div>
-      <input
-        type="text"
-        value={location}
-        onChange={e => setLocation(e.target.value)}
-        placeholder="Enter location" />
-      <button onClick={handleSearch} variant="primary">Search</button>
+      <input 
+        type="text" 
+        value={location} 
+        onChange={(e) => setLocation(e.target.value)} 
+        placeholder="Enter a city" 
+      />
+      <button onClick={handleSearch}>Search</button>
+      {weatherData && (
+        <div>
+          <h3>{weatherData.name}</h3>
+          <p>{weatherData.weather[0].description}</p>
+          <p>{weatherData.main.temp}°F</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default SearchBar;
